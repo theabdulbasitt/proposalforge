@@ -30,12 +30,7 @@ export async function middleware(request: NextRequest) {
     })
 
     // Check auth — if this fails, fail open (let request through)
-    const { data: { user }, error } = await supabase.auth.getUser()
-
-    if (error) {
-        console.error('Middleware auth error:', error.message)
-        return supabaseResponse
-    }
+    const { data: { user } } = await supabase.auth.getUser()
 
     // Protect pages — redirect to login if not authenticated
     const protectedRoutes = ['/dashboard', '/profile', '/new', '/proposal']

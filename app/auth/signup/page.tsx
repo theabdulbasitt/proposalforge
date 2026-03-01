@@ -25,6 +25,8 @@ export default function SignupPage() {
     const supabase = createClient()
 
     const handleSignup = async (e: React.FormEvent) => {
+        console.log('URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
+        console.log('KEY:', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.slice(0, 20))
         e.preventDefault()
         setLoading(true)
         setError('')
@@ -46,7 +48,7 @@ export default function SignupPage() {
             email: email.trim().toLowerCase(),
             password,
             options: {
-                emailRedirectTo: `${window.location.origin}/api/auth/callback`
+                emailRedirectTo: `http://localhost:3000/api/auth/callback`
             }
         })
 
